@@ -8,10 +8,9 @@ tempDir=$baseDir/../temp
 assetDir=$baseDir/../assets
 
 mkdir -p $tempDir
-$baseDir/hash-plutus.sh
 
 validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/multisig.plutus
-benefactorAddress=$1
+signingAddress=$1
 signingKey=$2
 scriptDatumHash=$3
 output=$4
@@ -19,7 +18,7 @@ scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/multisig.addr)
 
 bodyFile=$tempDir/lock-tx-body.01
 outFile=$tempDir/lock-tx.01
-changeOutput=$(cardano-cli-balance-fixer change --address $benefactorAddress $BLOCKCHAIN -o "$output")
+changeOutput=$(cardano-cli-balance-fixer change --address $signingAddress $BLOCKCHAIN -o "$output")
 
 extraOutput=""
 if [ "$changeOutput" != "" ];then
@@ -29,11 +28,11 @@ fi
 cardano-cli transaction build \
     --babbage-era \
     $BLOCKCHAIN \
-    $(cardano-cli-balance-fixer input --address $benefactorAddress $BLOCKCHAIN) \
+    $(cardano-cli-balance-fixer input --address $signingAddress $BLOCKCHAIN) \
     --tx-out "$scriptHash + $output" \
     --tx-out-datum-hash $scriptDatumHash \
-    --tx-out "$benefactorAddress + 1744798 lovelace $extraOutput" \
-    --change-address $benefactorAddress \
+    --tx-out "$signingAddress + 1744798 lovelace $extraOutput" \
+    --change-address $signingAddress \
     --protocol-params-file scripts/$BLOCKCHAIN_PREFIX/protocol-parameters.json \
     --out-file $bodyFile
 

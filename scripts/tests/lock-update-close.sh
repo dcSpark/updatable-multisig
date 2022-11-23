@@ -3,24 +3,24 @@ set -eu
 thisDir=$(dirname "$0")
 baseDir=$thisDir/../
 
-$baseDir/generate-redeemers.sh
+$baseDir/generate-datums.sh
 
-$baseDir/happy-path/lock-tx.sh 0 10 20
+$baseDir/happy-path/lock-tx.sh
 $baseDir/wait/until-next-block.sh
 
-echo Early Disburse Fails
+echo Wrong Signatures
 detected=false
 
-"$baseDir/happy-path/unlock-first-tx.sh" || {
+"$baseDir/happy-path/update-wrong-signatures-tx.sh" || {
     detected=true
 }
 
 if [ $detected == false ]; then
-  echo "FAILED! Disbursed funds too early"
+  echo "FAILED! Unlocked with the wrong signatures"
   exit 1
 fi
 
-echo Bad Datum Fails
+echo Bad Next Input Fails
 detected=false
 
 "$baseDir/failure-cases/unlock-first-bad-datum-tx.sh" || {
@@ -32,21 +32,8 @@ if [ $detected == false ]; then
   exit 1
 fi
 
-echo Too Few Signers Fails
-detected=false
-"$baseDir/failure-cases/unlock-first-to-few-signers-tx.sh" || {
-    detected=true
-}
-
-if [ $detected == false ]; then
-  echo "FAILED! Signing with too few keys worked."
-  exit 1
-fi
-
-sleep 10
 $baseDir/wait/until-next-block.sh
-$baseDir/happy-path/unlock-first-tx.sh
+$baseDir/happy-path/update-tx.sh
 
-sleep 20
 $baseDir/wait/until-next-block.sh
-$baseDir/happy-path/unlock-tx.sh
+$baseDir/happy-path/close-tx.sh

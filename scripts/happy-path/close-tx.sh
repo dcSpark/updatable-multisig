@@ -8,7 +8,7 @@ tempDir=$baseDir/../temp
 
 DATUM_PREFIX=${DATUM_PREFIX:-0}
 
-$baseDir/core/unlock-successfully-tx.sh \
+$baseDir/core/close-tx.sh \
   $(cat ~/$BLOCKCHAIN_PREFIX/beneficiary1.addr) \
   ~/$BLOCKCHAIN_PREFIX/beneficiary1.skey \
   ~/$BLOCKCHAIN_PREFIX/beneficiary2.skey \
