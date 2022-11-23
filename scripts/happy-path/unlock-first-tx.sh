@@ -12,7 +12,7 @@ $baseDir/core/unlock-first-successfully-tx.sh \
   $(cat ~/$BLOCKCHAIN_PREFIX/beneficiary.addr) \
   ~/$BLOCKCHAIN_PREFIX/beneficiary.skey \
   ~/$BLOCKCHAIN_PREFIX/beneficiary1.skey \
-  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting.json \
+  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/multisig.json \
   $(cat $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-hash.txt) \
   $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-updated-keys.json \
   "600000 lovelace" \

@@ -14,8 +14,8 @@ datumHash=$5
 unlockAmount=$6
 redeemerFile=$7
 
-validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/vesting.plutus
-scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/vesting.addr)
+validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/multisig.plutus
+scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/multisig.addr)
 
 $baseDir/hash-plutus.sh
 bodyFile=temp/unlock-tx-body.01

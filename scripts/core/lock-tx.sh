@@ -10,12 +10,12 @@ assetDir=$baseDir/../assets
 mkdir -p $tempDir
 $baseDir/hash-plutus.sh
 
-validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/vesting.plutus
+validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/multisig.plutus
 benefactorAddress=$1
 signingKey=$2
 scriptDatumHash=$3
 output=$4
-scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/vesting.addr)
+scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/multisig.addr)
 
 bodyFile=$tempDir/lock-tx-body.01
 outFile=$tempDir/lock-tx.01

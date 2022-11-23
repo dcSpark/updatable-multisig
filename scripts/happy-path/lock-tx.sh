@@ -10,7 +10,7 @@ NS="$1"
 shift
 
 DATUM_DIR="$tempDir/$BLOCKCHAIN_PREFIX/datums/$NS"
-DATUM_FILE="$DATUM_DIR/vesting.json"
+DATUM_FILE="$DATUM_DIR/multisig.json"
 DATUM_FILE1="$DATUM_DIR/vesting-updated-keys.json"
 DATUM_HASH_FILE="${DATUM_FILE%.*}-hash.txt"
 INVALID_DATUM_FILE="$DATUM_DIR/invalid.json"

@@ -11,15 +11,15 @@ DATUM_PREFIX=${DATUM_PREFIX:-0}
 
 beneficiaryAddr=$(cat ~/$BLOCKCHAIN_PREFIX/beneficiary.addr) \
 signingKey=~/$BLOCKCHAIN_PREFIX/beneficiary.skey \
-oldDatumFile=$tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting.json \
+oldDatumFile=$tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/multisig.json \
 oldDatumHash=$(cat $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-hash.txt) \
 newDatum=$tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-updated-keys.json \
 unlockAmount="600000 lovelace" \
 leftOverAmount="1400000 lovelace" \
 redeemerFile=$tempDir/$BLOCKCHAIN_PREFIX/redeemers/$DATUM_PREFIX/disburse.json
 
-validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/vesting.plutus
-scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/vesting.addr)
+validatorFile=$assetDir/$BLOCKCHAIN_PREFIX/multisig.plutus
+scriptHash=$(cat $assetDir/$BLOCKCHAIN_PREFIX/multisig.addr)
 
 $baseDir/hash-plutus.sh
 bodyFile=temp/unlock-tx-body.01
