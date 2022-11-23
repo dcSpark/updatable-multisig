@@ -1,0 +1,13 @@
+set -eu
+thisDir=$(dirname "$0")
+baseDir=$thisDir/../
+
+for i in "$thisDir"/*; do
+  N="$(basename $i)"
+  if [ "$N" == "find-utxo.sh" ]; then continue;
+  elif [ "$N" == "all" ]; then continue;
+  else
+    echo $N
+    "$thisDir/$N" | tail -n +2
+  fi
+done

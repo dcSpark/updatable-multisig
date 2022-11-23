@@ -1,0 +1,7 @@
+if [ "$(uname)" == "Darwin" ]; then
+  export CARDANO_NODE_SOCKET_PATH="/Users/$USER/Library/Application Support/Daedalus Mainnet/cardano-node.socket"
+else
+   export CARDANO_NODE_SOCKET_PATH="$HOME/.local/share/Daedalus/mainnet/cardano-node.socket"
+fi
+export BLOCKCHAIN=--mainnet
+export BLOCKCHAIN_PREFIX=mainnet
