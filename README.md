@@ -36,7 +36,10 @@ To completely remove all the assets, use the `Close` redeemer. The `Close` redee
 
 The compiled Plutus script is checked in to the following location: `assets/multisig.plutus`
 
-Testnet and mainnet assets are checked i
+Address can be found as followed:
+- Local testnet: `assets/local-testnet/multisig.addr`
+- Shared testnet: `assets/testnet/multisig.addr`
+- Mainnet: `assets/mainnet/multisig.addr`
 
 # Compiling
 
@@ -46,4 +49,44 @@ To compile call the compile script:
 
 ```bash
 ./scripts/compile
+```
+
+# Example Transaction
+
+Example transactions are provided in the folder `scripts/happy-path`.
+
+### ⚠️ Warning
+Running the example transactions requires `cardano-cli-balance-fixer` which can installed from this repo: https://github.com/Canonical-LLC/cardano-cli-balance-fixer
+
+To use the transactions, first test datums and wallets must be created.
+
+## Test Wallet Creation
+
+Run:
+
+```bash
+./scripts/wallets/make-all-wallets.sh
+```
+
+## Test Datum Creation
+
+Run:
+
+```bash
+./scripts/generate-datums
+```
+
+Now, one can run the `scripts/happy-path/` transactions.
+
+# Testing
+
+### ⚠️ Warning
+Running the test requires `cardano-cli-balance-fixer` which can installed from this repo: https://github.com/Canonical-LLC/cardano-cli-balance-fixer
+
+There is a single test script, which performs a number of integration tests functions.
+
+To execute the integration test, run:
+
+```bash
+./scripts/tests/lock-update-close.sh
 ```
