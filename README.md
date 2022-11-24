@@ -58,6 +58,12 @@ Example transactions are provided in the folder `scripts/happy-path`.
 ### ⚠️ Warning
 Running the example transactions requires `cardano-cli-balance-fixer` which can installed from this repo: https://github.com/Canonical-LLC/cardano-cli-balance-fixer
 
+First, create the protocol params file with:
+
+```bash
+./scripts/query-protocol-parameters.sh
+```
+
 To use the transactions, first test datums and wallets must be created.
 
 ## Test Wallet Creation
@@ -91,8 +97,8 @@ Now, one can run the `scripts/happy-path/` transactions.
 
 # Testing
 
-### ⚠️ Warning
-Running the test requires `cardano-cli-balance-fixer` which can installed from this repo: https://github.com/Canonical-LLC/cardano-cli-balance-fixer
+### ⚠️ Prerequistes
+**Follow all the setup steps in the `Example Transaction` section, before continuing.**
 
 There is a single test script, which performs a number of integration tests functions.
 
