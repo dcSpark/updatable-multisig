@@ -46,30 +46,39 @@ mkValidator
         theOutDatum :: OutputDatum
         !theOutDatum = case getContinuingOutputs ctx of
           [TxOut{txOutDatum}] -> txOutDatum
-          _ -> traceError "expected exactly one continuing output"
+          _ -> traceError "eEpected exactly one continuing output"
 
         Input {iRequiredCount = newRequiredCount, iKeys = newKeys} = case theOutDatum of
           OutputDatum (Datum dbs) -> unsafeFromBuiltinData dbs
           OutputDatumHash dh -> case findDatum dh info of
-            Nothing -> traceError "datum not found"
+            Nothing -> traceError "Datum not found"
             Just (Datum d) -> unsafeFromBuiltinData d
           NoOutputDatum -> traceError "Missing Datum Hash"
 
         newKeyCount :: Integer
         !newKeyCount = length newKeys
 
-        newInputIsValid :: Bool
-        !newInputIsValid
-          =  newKeyCount > 0
-          && newRequiredCount <= newKeyCount
-          && newRequiredCount > 0
+        newKeyCountIsGreaterThanZero :: Bool
+        !newKeyCountIsGreaterThanZero = newKeyCount > 0
+
+        newRequiredKeyCountIsGreaterThanZero :: Bool
+        !newRequiredKeyCountIsGreaterThanZero = newRequiredCount > 0
+
+        newRequiredCountIsLessThanOrEqualToKeyCount :: Bool
+        !newRequiredCountIsLessThanOrEqualToKeyCount = newRequiredCount <= newKeyCount
+
+        noDuplicates :: Bool
+        !noDuplicates = length (nub newKeys) == length newKeys
 
         hasEnoughSignatures :: Bool
         !hasEnoughSignatures =
           signedByAMajority oldKeys oldRequiredCount txInfoSignatories
 
-      in traceIfFalse "Not enough valid signatures" hasEnoughSignatures
-      && traceIfFalse "New datum is invalid"        newInputIsValid
+      in traceIfFalse "Not enough valid signatures"                      hasEnoughSignatures
+      && traceIfFalse "New count is not greater than zero"               newKeyCountIsGreaterThanZero
+      && traceIfFalse "New required count is not greater than zero"      newRequiredKeyCountIsGreaterThanZero
+      && traceIfFalse "New required count is not greater than key count" newRequiredCountIsLessThanOrEqualToKeyCount
+      && traceIfFalse "Duplicate keys in new datum"                      noDuplicates
 
 -------------------------------------------------------------------------------
 -- Boilerplate

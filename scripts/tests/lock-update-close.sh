@@ -35,12 +35,24 @@ fi
 echo Update with wrong signatures
 detected=false
 
-"$baseDir/failure-cases/update-wrong-signatures-tx copy.sh" || {
+"$baseDir/failure-cases/update-wrong-signatures-tx.sh" || {
     detected=true
 }
 
 if [ $detected == false ]; then
   echo "FAILED! Updating wrong keys succeeded"
+  exit 1
+fi
+
+echo Update with duplicate keys
+detected=false
+
+"$baseDir/failure-cases/update-bad-key-duplicates-tx.sh" || {
+    detected=true
+}
+
+if [ $detected == false ]; then
+  echo "FAILED! Updating duplicate keys succeeded"
   exit 1
 fi
 
