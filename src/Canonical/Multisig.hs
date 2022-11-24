@@ -91,8 +91,13 @@ wrapValidator
 wrapValidator a b c
   = check (mkValidator (unsafeFromBuiltinData a) (unsafeFromBuiltinData b) (unsafeFromBuiltinData c))
 
+plutonomyOptimizerSettings :: Plutonomy.OptimizerOptions
+plutonomyOptimizerSettings = Plutonomy.defaultOptimizerOptions
+  { Plutonomy.ooSplitDelay = False
+  }
+
 validator :: Validator
-validator = Plutonomy.optimizeUPLC $ mkValidatorScript $
+validator = Plutonomy.optimizeUPLCWith plutonomyOptimizerSettings $ mkValidatorScript $
     $$(compile [|| wrapValidator ||])
 
 -------------------------------------------------------------------------------
