@@ -75,7 +75,7 @@ mkValidator
           signedByAMajority oldKeys oldRequiredCount txInfoSignatories
 
       in traceIfFalse "Not enough valid signatures"                      hasEnoughSignatures
-      && traceIfFalse "New count is not greater than zero"               newKeyCountIsGreaterThanZero
+      && traceIfFalse "New key count is not greater than zero"           newKeyCountIsGreaterThanZero
       && traceIfFalse "New required count is not greater than zero"      newRequiredKeyCountIsGreaterThanZero
       && traceIfFalse "New required count is not greater than key count" newRequiredCountIsLessThanOrEqualToKeyCount
       && traceIfFalse "Duplicate keys in new datum"                      noDuplicates
