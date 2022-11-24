@@ -25,10 +25,10 @@ cat << EOF > $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/initial.json
           "bytes": "$user0"
         },
         {
-          "bytes": "$user2"
+          "bytes": "$user1"
         },
         {
-          "bytes": "$user3"
+          "bytes": "$user2"
         }
       ]
     }

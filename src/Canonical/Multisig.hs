@@ -32,12 +32,15 @@ signedByAMajority allKeys requiredCount signingKeys
   = length (filter (`elem` allKeys) signingKeys) >= requiredCount
 
 mkValidator :: Input -> Action -> ScriptContext -> Bool
-mkValidator Input {iRequiredCount = oldRequiredCount, iKeys = oldKeys} action ctx =
-  let
-    info@TxInfo{..} = scriptContextTxInfo ctx
-
-  in case action of
-    Close -> traceIfFalse "Not enough valid signatures" (signedByAMajority oldKeys oldRequiredCount txInfoSignatories)
+mkValidator
+  Input { iRequiredCount = oldRequiredCount
+        , iKeys = oldKeys
+        }
+  action
+  ctx@ScriptContext{ scriptContextTxInfo = info@TxInfo{..}} = case action of
+    Close -> traceIfFalse
+      "Not enough valid signatures"
+      (signedByAMajority oldKeys oldRequiredCount txInfoSignatories)
     Update ->
       let
         theOutDatum :: OutputDatum
@@ -62,7 +65,8 @@ mkValidator Input {iRequiredCount = oldRequiredCount, iKeys = oldKeys} action ct
           && newRequiredCount > 0
 
         hasEnoughSignatures :: Bool
-        !hasEnoughSignatures = signedByAMajority oldKeys oldRequiredCount txInfoSignatories
+        !hasEnoughSignatures =
+          signedByAMajority oldKeys oldRequiredCount txInfoSignatories
 
       in traceIfFalse "Not enough valid signatures" hasEnoughSignatures
       && traceIfFalse "New datum is invalid"        newInputIsValid

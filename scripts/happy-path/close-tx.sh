@@ -9,10 +9,9 @@ tempDir=$baseDir/../temp
 DATUM_PREFIX=${DATUM_PREFIX:-0}
 
 $baseDir/core/close-tx.sh \
-  $(cat ~/$BLOCKCHAIN_PREFIX/beneficiary1.addr) \
-  ~/$BLOCKCHAIN_PREFIX/beneficiary1.skey \
-  ~/$BLOCKCHAIN_PREFIX/beneficiary2.skey \
-  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-updated-keys.json \
-  $(cat $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/vesting-updated-keys-hash.txt) \
-  1000000 \
-  $tempDir/$BLOCKCHAIN_PREFIX/redeemers/$DATUM_PREFIX/disburse.json
+  $(cat ~/$BLOCKCHAIN_PREFIX/user1.addr) \
+  ~/$BLOCKCHAIN_PREFIX/user1.skey \
+  ~/$BLOCKCHAIN_PREFIX/user2.skey \
+  ~/$BLOCKCHAIN_PREFIX/user3.skey \
+  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/updated.json \
+  $(cat $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/updated-hash.txt)

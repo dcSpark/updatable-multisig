@@ -9,12 +9,11 @@ assetDir=$baseDir/../assets
 signingAddr=$1
 signingKey0=$2
 signingKey1=$3
-signingKey2=$4
-oldDatumFile=$5
-oldDatumHash=$6
-newDatum=$7
-unlockAmount=$8
-leftOverAmount=$9
+oldDatumFile=$4
+oldDatumHash=$5
+newDatum=$6
+unlockAmount=$7
+leftOverAmount=$8
 redeemerFile=$baseDir/redeemers/update.json
 
 validatorFile=$assetDir/multisig.plutus
@@ -45,7 +44,6 @@ cardano-cli transaction build \
     --tx-in-redeemer-file $redeemerFile \
     --required-signer $signingKey0 \
     --required-signer $signingKey1 \
-    --required-signer $signingKey2 \
     --tx-in-collateral $(cardano-cli-balance-fixer collateral --address $signingAddr $BLOCKCHAIN) \
     --tx-out "$scriptHash + $leftOverAmount" \
     --tx-out-datum-embed-file $newDatum \
@@ -63,7 +61,6 @@ cardano-cli transaction sign \
    --tx-body-file $bodyFile \
    --signing-key-file $signingKey0 \
    --signing-key-file $signingKey1 \
-   --signing-key-file $signingKey2 \
    $BLOCKCHAIN \
    --out-file $outFile
 
