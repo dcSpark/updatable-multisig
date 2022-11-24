@@ -11,9 +11,9 @@ DATUM_PREFIX=${DATUM_PREFIX:-0}
 $baseDir/core/update-tx.sh \
   $(cat ~/$BLOCKCHAIN_PREFIX/user0.addr) \
   ~/$BLOCKCHAIN_PREFIX/user0.skey \
-  ~/$BLOCKCHAIN_PREFIX/user4.skey \
+  ~/$BLOCKCHAIN_PREFIX/user1.skey \
   $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/initial.json \
   $(cat $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/initial-hash.txt) \
-  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/updated.json \
+  $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/bad-missing-keys.json \
   "600000 lovelace" \
   "1400000 lovelace"

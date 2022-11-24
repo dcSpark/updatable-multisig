@@ -65,4 +65,48 @@ cat << EOF > $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/updated.json
 
 EOF
 
+cat << EOF > $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/bad-required-count.json
+{
+  "constructor": 0,
+  "fields": [
+    {
+      "int" : 5
+    },
+    {
+      "list": [
+        {
+          "bytes": "$user1"
+        },
+        {
+          "bytes": "$user2"
+        },
+        {
+          "bytes": "$user3"
+        },
+        {
+          "bytes": "$user4"
+        }
+      ]
+    }
+  ]
+}
+
+EOF
+
+cat << EOF > $tempDir/$BLOCKCHAIN_PREFIX/datums/$DATUM_PREFIX/bad-missing-keys.json
+{
+  "constructor": 0,
+  "fields": [
+    {
+      "int" : 0
+    },
+    {
+      "list": [
+      ]
+    }
+  ]
+}
+
+EOF
+
 $thisDir/hash-datums.sh
