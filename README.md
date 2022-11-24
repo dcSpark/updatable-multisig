@@ -76,6 +76,17 @@ Run:
 ./scripts/generate-datums
 ```
 
+## Environment Variable Setup
+
+To setup the proper flags and socket variables for the test transactions, one must source the appropiate environment variables.
+
+### ⚠️ Warning
+To use the local testnet envars, the file must be modified to point to your local testnet location.
+
+- Local testnet: `source scripts/envars/local-testnet.envars`
+- Shared testnet: `source scripts/envars/testnet-env.envars`
+- Mainnet: `source scripts/envars/mainnet-env.envars`
+
 Now, one can run the `scripts/happy-path/` transactions.
 
 # Testing
